@@ -9,15 +9,13 @@ import 'auth_service.dart';
 class UserService {
   final String baseUrl = baseurl;
 
-  Future<Map<String, dynamic>> getUserProfile() async {   // Хэрэглэгчийн профайлын мэдээллийг авах
+  Future<Map<String, dynamic>> getUserProfile() async {   
     try {
-            // Нэвтрэх токен авах
       final token = await AuthService.getToken();
 
       if (token == null) {
         throw Exception('No authentication token found');
       }
-      // GET хүсэлт явуулж профайл мэдээлэл авна
       final response = await http.get(
         Uri.parse('${baseUrl}users/profile/'),
         headers: {
@@ -36,7 +34,7 @@ class UserService {
       throw Exception('Error getting user profile: $e');
     }
   }
-  // Файлаар профайл зураг шинэчлэх (mobile дээр)
+  // profile zurag shinechleh (mobile дээр)
   Future<Map<String, dynamic>> updateProfileImage(File imageFile) async {
     try {
       final token = await AuthService.getToken();
@@ -55,14 +53,12 @@ class UserService {
       request.headers.addAll({
         'Authorization': 'Bearer $token',
       });
-      // Файл нэмэх
       request.files.add(
         await http.MultipartFile.fromPath(
           'profile_image',
           imageFile.path,
         ),
       );
-      // Хүсэлт явуулж хариуг авна
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
 
@@ -70,7 +66,6 @@ class UserService {
       print('Upload response body: ${response.body}');
 
       if (response.statusCode == 200) {
-        // Хэрвээ амжилттай бол JSON болгож буцаана
         return json.decode(response.body);
       } else {
         throw Exception(
@@ -91,7 +86,6 @@ class UserService {
     request.headers.addAll({
       'Authorization': 'Bearer $token',
     });
-    // Byte array-аас файл нэмэх
     request.files.add(
       http.MultipartFile.fromBytes(
         'profile_image',

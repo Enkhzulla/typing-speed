@@ -63,9 +63,9 @@ def login_user(request):
     except User.DoesNotExist:
         return JsonResponse({'error': 'Имэйл бүртгэгдээгүй байна.'}, status=400)
 
-@api_view(['POST'])  # Зөвхөн POST хүсэлт хүлээн авна
-@permission_classes([IsAuthenticated])  # Зөвхөн нэвтэрсэн хэрэглэгч ашиглаж болно
-@parser_classes([MultiPartParser, FormParser])  # Файлын upload хийхэд зориулсан parser тохируулна
+@api_view(['POST'])  
+@permission_classes([IsAuthenticated])  
+@parser_classes([MultiPartParser, FormParser]) 
 def update_profile_image(request): 
     try:
         user = request.user
@@ -88,7 +88,7 @@ def update_profile_image(request):
 def get_user_profile(request): #Нэвтэрсэн хэрэглэгчийн профайл мэдээллийг авах API
 
     try:
-        serializer = UserSerializer(request.user)         # Нэвтэрсэн хэрэглэгчийг сериализад хийнэ
-        return Response(serializer.data, status=status.HTTP_200_OK)          # Хэрэглэгчийн мэдээллийг буцаана
+        serializer = UserSerializer(request.user)        
+        return Response(serializer.data, status=status.HTTP_200_OK)          
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

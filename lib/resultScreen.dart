@@ -33,17 +33,17 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  String _selectedLanguage = "en";    //songoson hel
-  String _selectedGameMode = "Easy"; //Сонгосон тоглоомын горим
-  List<int> _availableMinutes = []; //Сонгож болох минутууд
-  int? _selectedMinute; // Сонгосон минут
-  List<bool> _isSelectedGameMode = [true, false, false]; //Easy, Medium, Hard
-  List<dynamic> languageSummary = [];  //helnii medeelel
+  String _selectedLanguage = "en";    
+  String _selectedGameMode = "Easy"; 
+  List<int> _availableMinutes = [];
+  int? _selectedMinute;
+  List<bool> _isSelectedGameMode = [true, false, false];
+  List<dynamic> languageSummary = [];  
 
   @override
   void initState() {
     super.initState();
-    fetchLanguageSummary(); // Эхлээд хэлний мэдээллийг серверээс татна
+    fetchLanguageSummary(); 
   }
 // helnii medeellig tatah api
   Future<void> fetchLanguageSummary() async {

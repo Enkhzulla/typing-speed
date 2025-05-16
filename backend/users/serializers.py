@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):                              
     def get_profile_image_url(self, obj):      # Профайл зургийн URL-г авах тусгай функц
         return obj.profile_image_url
 
-class RegisterSerializer(serializers.ModelSerializer): # Хэрэглэгч бүртгүүлэхэд зориулсан сериализер
+class RegisterSerializer(serializers.ModelSerializer): 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
 
@@ -28,7 +28,6 @@ class RegisterSerializer(serializers.ModelSerializer): # Хэрэглэгч бү
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return attrs
 
-# hereglgch uusgh create punkts
     def create(self, validated_data):
         validated_data.pop('password2')
         user = User.objects.create_user(**validated_data)

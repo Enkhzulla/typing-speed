@@ -68,7 +68,6 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
     }
   }
 
-//  // 🟣 Хэрэглэгчийн профайл зургийг ачаална
   Future<void> _loadUserProfile() async {
     try {
       final userData = await _userService.getUserProfile();
@@ -81,7 +80,6 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
     }
   }
 
-  // 🖼 Зураг сонгож профайл зураг шинэчлэх (web болон mobile)
   Future<void> _pickAndUploadImage() async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -147,7 +145,6 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
     }
   }
 
-  // 🟣 Хэрэглэгчийн сорилын түүхийг ачаалж list болгож хадгална
   Future<void> _loadChallengeHistory() async {
     try {
       final data = await _challengeService.getUserChallengeHistory();
@@ -179,7 +176,6 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
     }
   }
 
-  // 🕓 Огноог форматлах функц
   String _formatDate(String? dateStr) {
     if (dateStr == null) return 'Unknown Date';
     try {
@@ -190,7 +186,6 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
     }
   }
 
-  // 🚪 Гарах товч дарсан үед auth logout хийнэ
   Future<void> _handleLogout() async {
     try {
       await AuthService.logout();
@@ -532,7 +527,7 @@ class _UserHistoryScreenState extends State<UserHistoryScreen> {
                 ),
     );
   }
-// ene dr blhr details deer drd orohoor hrgdh textuudin design ugnu edr
+// ene dr blhr details deer drd orohoor hrgdh textuudin design 
   Widget _buildDetailRow(
       String label, String value, Color valueColor, double fontSize,
       {bool isNumber = false}) {

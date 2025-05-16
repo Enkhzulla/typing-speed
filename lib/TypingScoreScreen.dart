@@ -23,17 +23,17 @@ class TypingScoreScreen extends StatefulWidget {
 }
 
 class _TypingScoreScreenState extends State<TypingScoreScreen> {
-  final ChallengeService _challengeService = ChallengeService(); // API-с дата татах
-  bool _isLoading = true; /// Дата татаж байгаа эсэх
-  Map<String, dynamic>? _lastAttempt; //Хамгийн сүүлийн сорилын үр дүн
+  final ChallengeService _challengeService = ChallengeService(); 
+  bool _isLoading = true; 
+  Map<String, dynamic>? _lastAttempt; 
   String? _error;
 
   @override
   void initState() {
     super.initState();
-    _fetchLastAttempt(); /// Эхлэхэд хамгийн сүүлийн сорилыг татах
+    _fetchLastAttempt(); 
   }
-//Хамгийн сүүлийн сорил татах
+//suuliin soril tth
   Future<void> _fetchLastAttempt() async {
     try {
       final attempts = await _challengeService.getUserChallengeHistory();
@@ -48,7 +48,6 @@ class _TypingScoreScreenState extends State<TypingScoreScreen> {
       });
     }
   }
-//Хэрэв Loading байвал achaallj bna gd unshina
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
@@ -56,13 +55,11 @@ class _TypingScoreScreenState extends State<TypingScoreScreen> {
         body: Center(child: CircularProgressIndicator()),
       );
     }
-//Хэрэв Алдаа гарсан бол
     if (_error != null) {
       return Scaffold(
         body: Center(child: Text('Error: $_error')),
       );
     }
-//Хэрэв sngsn сорил байхгүй бол
     if (_lastAttempt == null) {
       return Scaffold(
         body: Center(child: Text('No attempts found')),
@@ -130,7 +127,6 @@ class _TypingScoreScreenState extends State<TypingScoreScreen> {
                     ],
                   ),
                   child: Text(
-                    //Correct Words тоог шууд WPM гэж үзэж байна.
                     "${_lastAttempt!['correct_word_count']} WPM",
                     style: GoogleFonts.poppins(
                       fontSize: 48,
@@ -159,7 +155,7 @@ class _TypingScoreScreenState extends State<TypingScoreScreen> {
                 SizedBox(height: 20),
                 ScoreCard(
                   //Correct Keystrokes zuv tovch drltin too (Зөв бичигдсэн үсгийн тоо) 
-                  //10 зөв үг бичсэн → 10 × 5 = 50 зөв даралт (keystrokes) * 5 → нэг үгний дундаж уртыг 5 тэмдэгт гэж тооцсон байна
+                  //10 зөв үг бичсэн → 10 × 5 = 50 зөв даралт (keystrokes) * 5 → neg ugnii dundj urt
                     "Correct Keystrokes",
                     "${(_lastAttempt!['correct_word_count'] * 5).round()}",
                     Colors.deepPurple),
@@ -279,7 +275,7 @@ class ScoreCard extends StatelessWidget {
                   title,
                   style: GoogleFonts.poppins(
                     fontSize: 18,
-                    fontWeight: FontWeight.w600,  //ene dr correct accuracy edrin onoog tod haruulah hesgig hjn
+                    fontWeight: FontWeight.w600, 
                     color: Colors.deepPurple.shade800,
                   ),
                 ),

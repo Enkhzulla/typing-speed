@@ -13,20 +13,19 @@ class ChallengeService {
       if (token == null) {
         throw Exception('No authentication token found');
       }
-      // GET хүсэлтээр хэрэглэгчийн оролцсон сорилын мэдээллийг авна
       final response = await http.get(
         Uri.parse('$baseUrl/attempts/'),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token', //Токен дамжуулна
+          'Authorization': 'Bearer $token', 
         },
       );
 
-      if (response.statusCode == 200) {          // 200 амжилттай хариу ирсэн бол JSON задлаад буцаана
-        final List<dynamic> data = json.decode(response.body);         // Амжилттай ирсэн хариуг decode хийнэ
+      if (response.statusCode == 200) {      
+        final List<dynamic> data = json.decode(response.body);         
         return data.map((item) => item as Map<String, dynamic>).toList();
       } else if (response.statusCode == 401) { 
-        // Token expired or invalid // hugaca dussn esvl huchinq
+        // Token expired or invalid 
         await AuthService.logout();
         throw Exception('Session expired. Please login again.');
       } else {
@@ -48,7 +47,6 @@ class ChallengeService {
       if (token == null) {
         throw Exception('No authentication token found');
       }
-      // Илгээх өгөгдлийг JSON болгож бэлтгэнэ
       final data = {
         'challenge': challengeId,
         'correct_word_count': correctWordCount,
@@ -106,7 +104,7 @@ class ChallengeService {
 
         print('Response charset: $charset');
 
-        var responseData = json.decode(utf8.decode(response.bodyBytes));         // Хариуг UTF8 болгож decode хийнэ
+        var responseData = json.decode(utf8.decode(response.bodyBytes));      
 
         if (responseData.containsKey('text')) {
           print('Challenge text: ${responseData['text']}');
@@ -114,7 +112,6 @@ class ChallengeService {
 
         return responseData;
       } else if (response.statusCode == 401) {
-        // Token хугацаа дууссан бол logout
         await AuthService.logout();
         throw Exception('Session expired. Please login again.');
       } else {
